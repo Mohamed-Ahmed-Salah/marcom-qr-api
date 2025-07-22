@@ -9,3 +9,4 @@ This project is a Java Spring Boot application that runs inside a Docker contain
 - ☁️ Runs on an AWS EC2 instance
 - 📄 Swagger UI for interactive API documentation
     http://localhost:8080/swagger-ui/index.html#/
+- Postman collection: Marcom.postman_collection.json
