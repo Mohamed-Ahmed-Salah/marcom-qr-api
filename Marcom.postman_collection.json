@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "d664a1a3-e3e5-4331-aadd-efadc0756201",
+		"name": "Marcom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25727972"
+	},
+	"item": [
+		{
+			"name": "get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/users"
+			},
+			"response": []
+		},
+		{
+			"name": "scan id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "{{url}}/scan/REG12345"
+			},
+			"response": []
+		},
+		{
+			"name": "all scans",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/scan/all?page=0&size=20",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"scan",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all scans by registrationId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/scan/registration/REG12345?page=0&size=20",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"scan",
+						"registration",
+						"REG12345"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
