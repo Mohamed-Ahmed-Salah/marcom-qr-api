@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql-db
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ROOTPASSWORDTOCHANGE
+      MYSQL_DATABASE: marcom
+      MYSQL_USER: springDockerUser
+      MYSQL_PASSWORD: PASSWORDTOCHANGE
+    ports:
+      - "3307:3306"  
+    networks:
+      - app-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uspringDockerUser", "-pPASSWORDTOCHANGE"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  app:
+    build: .  
+    container_name: spring-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/marcom?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: springDockerUser
+      SPRING_DATASOURCE_PASSWORD: PASSWORDTOCHANGE
+      SPRING_JPA_SHOW_SQL: "true"
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
